@@ -1,19 +1,22 @@
-from flask import Flask, request, render_template, make_response
+from flask import Flask, request, render_template, make_response, abort
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    val = "Hello World!"
-    username = request.headers.get("username")
-    val = val + "\n" + "Hello %s!" %username
-    resp = make_response(render_template('hello.html', name=username))
-    resp.set_cookie('username', username)
-    resp.headers['username']=username
-    return resp
+    return "Hello, this is home page!"
 
 @app.route('/test')
 def hello_test():
     return 'Hello, Test!'
+
+@app.route("/user")
+def user():
+    val = "Hello World!"
+    username = request.headers.get("username")
+    resp = make_response(render_template('hello.html', name=username))
+    resp.set_cookie('username', username)
+    resp.headers['username'] = username
+    return resp
 
 @app.route('/debug')
 def hello_debug():
@@ -23,15 +26,20 @@ def hello_debug():
 def print_myVal(myVal):
     return 'Hello, %s!' %myVal
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login')
 def login():
-    if request.method == 'POST':
-        return "This is a response for login POST request!"
-    else:
-        return 'This is login form!'
+    abort(401)
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('page_not_found.html'), 404
 
 
 @app.route('/hello/')
 @app.route('/hello/<name>')
 def hello(name=None):
     return render_template('hello.html', name=name)
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')
+
