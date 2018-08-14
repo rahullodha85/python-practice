@@ -6,4 +6,4 @@ services:
       dockerfile: ./docker/Dockerfile
     ports:
      - "5000:5000"
-    image: rahullodha85/python-practice_web:1
+    image: rahullodha85/python-practice_web
