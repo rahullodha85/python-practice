@@ -1,7 +1,9 @@
 version: '3'
 services:
-  web:
-    build: .
+  python-practice:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
     ports:
      - "5000:5000"
     image: rahullodha85/python-practice_web:1
