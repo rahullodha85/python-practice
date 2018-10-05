@@ -105,3 +105,8 @@ venv.bak/
 
 #IDEA
 .idea/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
