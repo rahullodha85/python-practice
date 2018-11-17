@@ -1,6 +1,4 @@
 provider "aws" {
-  access_key = "${var.access_key}"
-  secret_key = "${var.secret_key}"
   region = "us-east-1"
 }
 
@@ -42,11 +40,11 @@ resource "aws_instance" "example" {
 //  }
 //  user_data = "${data.template_file.userdata.rendered}"
   user_data = <<-EOF
-                sudo apt-get install docker
-                EOF
-//              #!/bin/bash
-//              echo "Hello, World" > index.html
-//              nohup busybox httpd -f -p "${var.server_port}" &
+              #!/bin/bash
+              echo "Hello, World" > index.html
+              nohup busybox httpd -f -p "${var.server_port}" &
+              EOF
+//              sudo apt-get install docker
 //              EOF
 
   tags {
@@ -55,7 +53,7 @@ resource "aws_instance" "example" {
 }
 
 resource "aws_security_group" "instance" {
-  name = "terraform-example-instance"
+  name = "terraform-example-DMZ"
   ingress {
     from_port = "${var.server_port}"
     to_port = "${var.server_port}"
