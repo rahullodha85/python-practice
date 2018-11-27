@@ -1,5 +1,7 @@
-from flask import Flask, request, render_template, make_response, abort
-app = Flask(__name__)
+from flask import request, render_template, make_response, abort
+
+from app import app
+
 
 @app.route('/')
 def index():
@@ -39,7 +41,3 @@ def page_not_found(error):
 @app.route('/hello/<name>')
 def hello(name=None):
     return render_template('hello.html', name=name)
-
-if __name__ == "__main__":
-    app.run(host='0.0.0.0')
-
