@@ -19,7 +19,7 @@ data "template_file" "userdata" {
 }
 
 resource "aws_instance" "example" {
-  ami = "ami-2d39803a"
+  ami = "ami-013be31976ca2c322"
   instance_type = "t2.micro"
   vpc_security_group_ids = ["${aws_security_group.instance.id}"]
   key_name = "ec2"
@@ -38,15 +38,7 @@ resource "aws_instance" "example" {
 //      "/tmp/terraform-deploy.sh"
 //    ]
 //  }
-//  user_data = "${data.template_file.userdata.rendered}"
-  user_data = <<-EOF
-              #!/bin/bash
-              echo "Hello, World" > index.html
-              nohup busybox httpd -f -p "${var.server_port}" &
-              EOF
-//              sudo apt-get install docker
-//              EOF
-
+  user_data = "${file("terraform-deploy.sh")}"
   tags {
     Name = "terraform-example"
   }
@@ -64,6 +56,12 @@ resource "aws_security_group" "instance" {
     from_port = "${var.ssh_port}"
     to_port = "${var.ssh_port}"
     protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
