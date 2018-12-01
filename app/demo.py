@@ -1,15 +1,18 @@
-from flask import Flask, request, render_template, make_response, abort
-app = Flask(__name__)
+from flask import request, render_template, make_response, abort, Blueprint
 
-@app.route('/')
+from app import app
+
+demo = Blueprint('demo_bblueprint', __name__)
+
+@demo.route('/')
 def index():
     return "Hello, this is home page!"
 
-@app.route('/test')
+@demo.route('/test')
 def hello_test():
     return 'Hello, Test!'
 
-@app.route("/user")
+@demo.route("/user")
 def user():
     val = "Hello World!"
     username = request.headers.get("username")
@@ -18,28 +21,24 @@ def user():
     resp.headers['username'] = username
     return resp
 
-@app.route('/debug')
+@demo.route('/debug')
 def hello_debug():
     return 'Hello, Debug!'
 
-@app.route('/<myVal>')
+@demo.route('/<myVal>')
 def print_myVal(myVal):
     return 'Hello, %s!' %myVal
 
-@app.route('/login')
+@demo.route('/login')
 def login():
     abort(401)
 
-@app.errorhandler(404)
+@demo.errorhandler(404)
 def page_not_found(error):
     return render_template('page_not_found.html'), 404
 
 
-@app.route('/hello/')
-@app.route('/hello/<name>')
+@demo.route('/hello/')
+@demo.route('/hello/<name>')
 def hello(name=None):
     return render_template('hello.html', name=name)
-
-if __name__ == "__main__":
-    app.run(host='0.0.0.0')
-
