@@ -1,7 +1,5 @@
 from flask import request, render_template, make_response, abort, Blueprint
 
-from app import app
-
 demo = Blueprint('demo_bblueprint', __name__)
 
 @demo.route('/')
