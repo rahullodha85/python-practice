@@ -1,0 +1,9 @@
+{
+  "default":{
+    "influx_db_host":"localhost",
+    "influx_db_port":8086
+  },
+  "dockerized":{
+    "influx_db_host":"influxdb"
+  }
+}
