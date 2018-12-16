@@ -110,3 +110,6 @@ venv.bak/
 .terraform/
 *.tfstate
 *.tfstate.backup
+
+
+.DS_Store
