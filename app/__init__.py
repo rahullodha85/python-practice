@@ -7,7 +7,7 @@ from app.helpers.configloader import ConfigLoader
 
 app = Flask(__name__)
 
-config_loader = ConfigLoader('app/resources/config.json')
+config_loader = ConfigLoader()
 if (sys.argv.__len__()>1):
     env = sys.argv[1]
     app.config.update(config_loader.load(env))
