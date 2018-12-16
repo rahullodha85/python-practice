@@ -111,5 +111,6 @@ venv.bak/
 *.tfstate
 *.tfstate.backup
 
-
+grafana/
+influxdb/
 .DS_Store
