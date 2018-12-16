@@ -113,3 +113,5 @@ venv.bak/
 
 grafana/
 influxdb/
+
+.DS_Store
