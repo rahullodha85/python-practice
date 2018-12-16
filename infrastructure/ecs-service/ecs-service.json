@@ -1,0 +1,14 @@
+{
+    "cluster": "my-cluster",
+    "serviceName": "my-service",
+    "taskDefinition": "python-app",
+    "loadBalancers": [
+        {
+            "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:741023513991:targetgroup/my-target-group/d07789b05d055e75",
+            "containerName": "python-web-api",
+            "containerPort": 5000
+        }
+    ],
+    "desiredCount": 1,
+    "role": "ecsServiceRole"
+}
