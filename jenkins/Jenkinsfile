@@ -4,6 +4,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo 'Building Docker Image'
+                sh 'echo whoami'
                 script {
                     app = docker.build('rahullodha85/python-practice')
                 }
