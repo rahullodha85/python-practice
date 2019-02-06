@@ -5,6 +5,8 @@ pipeline {
             steps {
                 echo 'Building Docker Image'
                 sh 'echo whoami'
+                sh 'whoami'
+                echo 'whoami'
                 script {
                     app = docker.build('rahullodha85/python-practice')
                 }
