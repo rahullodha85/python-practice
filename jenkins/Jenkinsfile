@@ -5,7 +5,7 @@ pipeline {
             steps {
                 echo 'Building Docker Image'
                 script {
-                    app = docker.build('rahullodha85/python-practice')
+                    app = docker.build('edinpark/python-practice')
                 }
             }
         }
