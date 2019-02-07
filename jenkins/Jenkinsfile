@@ -4,11 +4,19 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo 'Building Docker Image'
-                sh 'echo whoami'
-                sh 'whoami'
-                echo 'whoami'
                 script {
                     app = docker.build('rahullodha85/python-practice')
+                }
+            }
+        }
+        stage('Push Docker Image') {
+            steps {
+                echo 'Pushing Docker Image to DockerHub'
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub'){
+                        app.push('123456')
+                        app.push('latest')
+                    }
                 }
             }
         }
